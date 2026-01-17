@@ -1,4 +1,3 @@
-import "./floatingLines.css";
 import { useEffect, useRef } from 'react';
 import {
   Scene,
@@ -11,8 +10,8 @@ import {
   Vector2,
   Clock
 } from 'three';
-import { memo } from "react";
-import './floatingLines.css';
+
+import './FloatingLines.css';
 
 const vertexShader = `
 precision highp float;
@@ -118,7 +117,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
   }
 
   float m = uv.y - y;
-  return 0.0175 / max(abs(m) + 0.01, 1e-3) + 0.01;
+  return 0.005 / max(abs(m) + 0.01, 1e-3) + 0.01;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
@@ -230,7 +229,7 @@ function hexToVec3(hex) {
   return new Vector3(r / 255, g / 255, b / 255);
 }
 
-function FloatingLines({
+export default function FloatingLines({
   linesGradient,
   enabledWaves = ['top', 'middle', 'bottom'],
   lineCount = [6],
@@ -480,5 +479,3 @@ function FloatingLines({
     />
   );
 }
-
-export default memo(FloatingLines);

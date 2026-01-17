@@ -1,38 +1,455 @@
-.App {
-  text-align: center;
+:root {
+  --primary-blue: #8b5cf6;
+  --accent-orange: #f97316;
+  --text-light: #ffffff;
+  --text-dim: #94a3b8;
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-.App-logo {
-  height: 40vmin;
+/* Base Dark Page Setup */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #020617;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Background Animation Layer */
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+  filter: brightness(0.8);
+}
+
+/* Content Layer Pass-Through */
+.content-layer {
+  position: relative;
+  z-index: 1;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* IMPORTANT: Enable mouse on ALL new interactive elements */
+.content-layer a,
+.content-layer button,
+.content-layer .card,
+.content-layer .event-card,
+.content-layer header {
+  pointer-events: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Sticky Header Fix */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo .icon {
+  color: var(--primary-blue);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-align: left;
+}
+
+.logo-text strong {
+  color: var(--text-light);
+}
+
+.logo-text small {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: var(--text-light);
+}
+
+nav a.active {
+  color: white;
+  background: var(--primary-blue);
+  padding: 5px 18px;
+  border-radius: 20px;
+}
+
+.btn-register-nav {
+  background: linear-gradient(to right, #f97316, #ef4444);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Hero & Containers */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.about-hero h1 span {
+  color: var(--primary-blue);
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 1.25rem;
+  max-width: 700px;
+}
+
+/* About Grid Container - 50% Width Centered */
+.about-container {
+  width: 100%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 95%;
+}
+
+.card {
+  background: rgba(30, 30, 30, 0.5);
+  backdrop-filter: blur(12px);
+  padding: 35px;
+  border-radius: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+/* Left column cards - Mission and Values */
+.info-column .card {
+  padding: 30px;
+}
+
+/* Right column - Goals card */
+.goals-card {
+  padding: 30px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Card Header - Icon and Title in Row */
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.card-header-row h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Indented Text - Aligns under heading, not icon */
+.card-text-indented {
+  margin-left: calc(2rem + 15px); /* Icon size + gap */
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+/* Goals List with White Circles */
+.goals-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goals-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  line-height: 1.6;
+}
+
+.goals-list li span {
+  background: white;
+  color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+/* --- NEW: Events Section Styling --- */
+
+.events-section {
+  width: 100%;
+  margin-top: 120px;
+  text-align: center;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.event-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  padding: 35px;
+  border-radius: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: 0.3s;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+}
+
+/* Colored Accents */
+.border-blue {
+  border-top: 5px solid #3b82f6;
+}
+
+.border-cyan {
+  border-top: 5px solid #06b6d4;
+}
+
+.border-red {
+  border-top: 5px solid #ef4444;
+}
+
+.event-date {
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.event-details {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.btn-event-blue {
+  background: #2563eb;
   color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-event-cyan {
+  background: #0891b2;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn-event-red {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-view-all {
+  margin-top: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid var(--glass-border);
+  padding: 15px 40px;
+  border-radius: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+/* Styling for the Our Goals icon */
+.small-icon {
+  font-size: 1.8rem; /* Increase this number to make it even bigger */
+  flex-shrink: 0;
+}
+
+/* Ensure the header container aligns them correctly */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px; /* Adds space between header and the list below */
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-box {
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+}
+
+.blue-bg {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+.orange-bg {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+@media (max-width: 900px) {
+
+  .about-container {
+    width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .about-grid,
+  .events-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .about-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .card-text-indented {
+    margin-left: 0;
   }
 }
+
+/* --- Optimized Dimensions for Stats & Cards --- */
+
+.stat-box { 
+  /* Reduced vertical padding for smaller height */
+  padding: 1px 1px; 
+  border-radius: 28px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to left align */
+  min-height: 135px; /* Further reduced height */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding-left: 30px; /* Add left padding for better spacing */
+}
+
+.stat-box h2 { 
+  margin: 0; 
+  font-size: 2.5rem;   /* Large impactful numbers */
+  font-weight: 900; 
+  line-height: 1;
+}
+
+.stat-box p { 
+  margin: 8px 0 0 0; 
+  font-size: 0.9rem; /* Smaller text */
+  font-weight: 400; /* Normal weight instead of 500 */
+  opacity: 0.9;
+}
+
