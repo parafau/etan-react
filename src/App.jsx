@@ -2,14 +2,16 @@ import React from 'react';
 import FloatingLines from './components/floating-lines/FloatingLines';
 import Dock from './components/dock/dock';
 import './App.css';
-import { 
-  VscHome, VscInfo, VscCalendar, VscFiles, 
-  VscOrganization, VscMail, VscEdit 
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+import {
+  VscHome, VscInfo, VscCalendar, VscFiles,
+  VscOrganization, VscMail, VscEdit
 } from 'react-icons/vsc';
 
 function App() {
   const navItems = [
-    { icon: <VscHome size={22} />, label: 'Home', onClick: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
+    { icon: <VscHome size={22} />, label: 'Home', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
     { icon: <VscInfo size={22} />, label: 'About', onClick: () => console.log('About clicked') },
     { icon: <VscCalendar size={22} />, label: 'Events', onClick: () => console.log('Events clicked') },
     { icon: <VscFiles size={22} />, label: 'Gallery', onClick: () => console.log('Gallery clicked') },
@@ -18,28 +20,47 @@ function App() {
     { icon: <VscEdit size={22} />, label: 'Register', onClick: () => console.log('Register clicked'), className: 'dock-register' },
   ];
 
+
+  const { scrollYProgress } = useScroll();
+
+  /*
+    Events starts coming up when user is
+    ~60% through the page
+  */
+  const eventsY = useTransform(
+    scrollYProgress,
+    [0.55, 0.75],
+    ['100%', '0%']
+  );
+
+
   return (
     <div className="app-wrapper">
       <div className="bg-layer">
-        <FloatingLines
-          llinesGradient={['#4C1D95', '#7C3AED', '#f80202']}
-          lineCount={[15, 12, 12]}
-          lineDistance={[5, 4, 3]}
-          animationSpeed={0.5}
-          interactive={true}
-          bendStrength={-1.8}
-        />
+<FloatingLines
+linesGradient={["#34D399", "#06B6D4", "#8B5CF6", "#afacac"]}
+// Green → Cyan → Purple → Pink
+  enabledWaves={['middle', 'bottom']}
+  lineCount={[15, 15]}
+  lineDistance={[8,8]}
+  bottomWavePosition={{ x: 0, y: -1.5, rotate: 1.85 }}
+  middleWavePosition={{ x: 2, y: 1.5, rotate: 1.85 }}
+  animationSpeed={3.3}
+  parallaxStrength={0.5}
+  interactive={true}
+  bendStrength={-3}
+/>
       </div>
 
       <div className="content-layer">
         <main className="container">
           {/* Hero Section */}
           <section className="about-hero">
-             <div className="logo-placeholder" style={{marginBottom: '20px', fontSize: '2rem'}}>
-                <strong>&lt;/&gt; E-TAN</strong>
-             </div>
-             <h1>About <span>E-TAN</span></h1>
-             <p className="subtitle">Empowering students to create meaningful change through technology</p>
+            <div className="logo-placeholder" style={{ marginBottom: '20px', fontSize: '2rem' }}>
+              <strong>&lt;/&gt; E-TAN</strong>
+            </div>
+            <h1>About <span>E-TAN</span></h1>
+            <p className="subtitle">Empowering students to create meaningful change through technology</p>
           </section>
 
           {/* About Content Grid */}
@@ -89,51 +110,94 @@ function App() {
               </div>
             </div>
           </div>
+          {/* Scroll spacer to drive Events reveal */}
+          <div style={{ height: '45vh' }} />
+
 
           {/* Upcoming Events Section */}
-          <section className="events-section">
-            <div className="section-header">
-              <h1>Upcoming <span>Events</span></h1>
-              <p className="subtitle">Join us for exciting workshops, hackathons, and networking opportunities</p>
+          <motion.section
+            className="events-overlay"
+            style={{ y: eventsY }}
+          >
+            <div className="events-inner">
+              <div className="section-header">
+                <h1>Upcoming <span>Events</span></h1>
+                <p className="subtitle">
+                  Join us for exciting workshops, hackathons, and networking opportunities
+                </p>
+              </div>
+
+              <div className="events-grid">
+                <div className="event-card border-blue">
+                  <div className="event-date">📅 December 15, 2025</div>
+                  <h3>Tech Workshop: AI & Machine Learning</h3>
+                  <p>Hands-on workshop exploring the fundamentals of AI and ML applications in social impact.</p>
+                  <div className="event-card-footer">
+                    <div className="event-details">
+                      <span>🕒 2:00 PM - 5:00 PM</span>
+                      <span>📍 SFIT Campus, Lab 301</span>
+                    </div>
+                    <button className="btn-event-blue">Register Now →</button>
+                  </div>
+                </div>
+
+                <div className="event-card border-cyan">
+                  <div className="event-date">📅 January 20, 2026</div>
+                  <h3>Hackathon: Code for Change</h3>
+                  <p>Build innovative solutions to real-world problems in this 12-hour coding marathon.</p>
+                  <div className="event-card-footer">
+                    <div className="event-details">
+                      <span>🕒 9:00 AM - 9:00 PM</span>
+                      <span>📍 SFIT Main Auditorium</span>
+                    </div>
+                    <button className="btn-event-cyan">Register Now →</button>
+                  </div>
+                </div>
+
+                <div className="event-card border-red">
+                  <div className="event-date">📅 February 5, 2026</div>
+                  <h3>Guest Lecture: Tech for Social Good</h3>
+                  <p>Industry experts share insights on leveraging technology for social impact.</p>
+                  <div className="event-card-footer">
+                    <div className="event-details">
+                      <span>🕒 4:00 PM - 6:00 PM</span>
+                      <span>📍 Virtual Event</span>
+                    </div>
+                    <button className="btn-event-red">Register Now →</button>
+                  </div>
+                </div>
+
+                <div className="event-card border-blue">
+                  <div className="event-date">📅 February 18, 2026</div>
+                  <h3>Project Showcase & Demo Day</h3>
+                  <p>Present your innovative projects to industry leaders and potential investors.</p>
+                  <div className="event-card-footer">
+                    <div className="event-details">
+                      <span>🕒 3:00 PM - 7:00 PM</span>
+                      <span>📍 SFIT Innovation Hub</span>
+                    </div>
+                    <button className="btn-event-blue">Register Now →</button>
+                  </div>
+                </div>
+
+                <div className="event-card border-cyan">
+                  <div className="event-date">📅 March 10, 2026</div>
+                  <h3>Web Development Bootcamp</h3>
+                  <p>Intensive 3-day bootcamp covering modern web technologies and frameworks.</p>
+                  <div className="event-card-footer">
+                    <div className="event-details">
+                      <span>🕒 10:00 AM - 6:00 PM</span>
+                      <span>📍 SFIT Computer Lab</span>
+                    </div>
+                    <button className="btn-event-cyan">Register Now →</button>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ height: '15vh' }} />
             </div>
+          </motion.section>
 
-            <div className="events-grid">
-              <div className="event-card border-blue">
-                <div className="event-date">📅 December 15, 2025</div>
-                <h3>Tech Workshop: AI & Machine Learning</h3>
-                <p>Hands-on workshop exploring the fundamentals of AI and ML applications in social impact.</p>
-                <div className="event-details">
-                  <span>🕒 2:00 PM - 5:00 PM</span>
-                  <span>📍 SFIT Campus, Lab 301</span>
-                </div>
-                <button className="btn-event-blue">Register Now →</button>
-              </div>
-
-              <div className="event-card border-cyan">
-                <div className="event-date">📅 January 20, 2026</div>
-                <h3>Hackathon: Code for Change</h3>
-                <p>Build innovative solutions to real-world problems in this 12-hour coding marathon.</p>
-                <div className="event-details">
-                  <span>🕒 9:00 AM - 9:00 PM</span>
-                  <span>📍 SFIT Main Auditorium</span>
-                </div>
-                <button className="btn-event-cyan">Register Now →</button>
-              </div>
-
-              <div className="event-card border-red">
-                <div className="event-date">📅 February 5, 2026</div>
-                <h3>Guest Lecture: Tech for Social Good</h3>
-                <p>Industry experts share insights on leveraging technology for social impact.</p>
-                <div className="event-details">
-                  <span>🕒 4:00 PM - 6:00 PM</span>
-                  <span>📍 Virtual Event</span>
-                </div>
-                <button className="btn-event-red">Register Now →</button>
-              </div>
-            </div>
-
-            <button className="btn-view-all">View All Events</button>
-          </section>
         </main>
 
         {/* The Floating Dock */}

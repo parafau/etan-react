@@ -1,5 +1,5 @@
 :root {
-  --primary-blue: #8b5cf6;
+  --primary-blue: #06B6D4;
   --accent-orange: #f97316;
   --text-light: #ffffff;
   --text-dim: #94a3b8;
@@ -10,10 +10,32 @@
 /* Base Dark Page Setup */
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Tektur', sans-serif;
   background-color: #020617;
   color: var(--text-light);
   line-height: 1.6;
+}
+
+/* Typography Enhancement - Orbitron for all headings with glow */
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  /* Bright silver/white text with balanced glowing effect */
+  color: #ffffff;
+text-shadow: 
+  0 0 10px rgba(255, 255, 255, 0.05),
+  0 0 20px rgba(124, 58, 237, 0.5),    /* Violet */
+  0 0 30px rgba(139, 92, 246, 0.5),     /* Purple */
+  0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Typography Enhancement - Tektur for paragraphs */
+p {
+  font-family: 'Tektur', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
 /* Background Animation Layer */
@@ -52,21 +74,28 @@ body {
   pointer-events: auto;
 }
 
-/* Sticky Header Fix */
+/* Sticky Header Fix - Enhanced with premium glass */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5%;
-  background: rgba(2, 6, 23, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--glass-border);
+  /* Premium glass gradient overlay */
+  background: linear-gradient(
+    135deg,
+    rgba(2, 6, 23, 0.85) 0%,
+    rgba(15, 23, 42, 0.8) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
   box-sizing: border-box;
+  /* Subtle depth shadow */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
@@ -121,14 +150,23 @@ nav a.active {
   border-radius: 20px;
 }
 
+/* Enhanced button with subtle glass treatment */
 .btn-register-nav {
-  background: linear-gradient(to right, #f97316, #ef4444);
+  background: linear-gradient(135deg, #f97316, #ef4444);
   color: white;
   border: none;
   padding: 10px 24px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  /* Subtle elevation */
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-register-nav:hover {
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+  transform: translateY(-1px);
 }
 
 /* Hero & Containers */
@@ -150,6 +188,8 @@ nav a.active {
   font-size: 3.5rem;
   margin-bottom: 15px;
   font-weight: 800;
+  /* Improved text contrast on dark bg */
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .about-hero h1 span {
@@ -157,9 +197,11 @@ nav a.active {
 }
 
 .subtitle {
+  font-family: 'Tektur', sans-serif;
   color: var(--text-dim);
   font-size: 1.25rem;
   max-width: 700px;
+  line-height: 1.7;
 }
 
 /* About Grid Container - 50% Width Centered */
@@ -176,16 +218,57 @@ nav a.active {
   width: 95%;
 }
 
+/* Premium glassmorphism card - Apple/Linear style */
 .card {
-  background: rgba(30, 30, 30, 0.5);
-  backdrop-filter: blur(12px);
+  /* Layered gradient for depth */
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.6) 0%,
+    rgba(15, 23, 42, 0.5) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.05);
   padding: 35px;
   border-radius: 28px;
   margin-bottom: 30px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Soft multi-layer shadow for depth */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* Refined border with gradient */
+  border: 1px solid rgba(255, 255, 255, 0.12);
   text-align: left;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Subtle internal highlight */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Premium hover effect */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Subtle top highlight on cards */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  opacity: 0.6;
 }
 
 /* Left column cards - Mission and Values */
@@ -196,10 +279,6 @@ nav a.active {
 /* Right column - Goals card */
 .goals-card {
   padding: 30px;
-}
-
-.card:hover {
-  transform: translateY(-8px);
 }
 
 /* Card Header - Icon and Title in Row */
@@ -219,13 +298,25 @@ nav a.active {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
+  /* Enhanced for Orbitron with balanced glow */
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.35),
+    0 0 30px rgba(139, 92, 246, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Indented Text - Aligns under heading, not icon */
 .card-text-indented {
-  margin-left: calc(2rem + 15px); /* Icon size + gap */
+  margin-left: calc(2rem + 15px);
   line-height: 1.7;
-  color: var(--text-dim);
+  /* Enhanced text clarity with Tektur */
+  font-family: 'Tektur', sans-serif;
+  font-weight: 400;
+  color: rgba(148, 163, 184, 0.95);
 }
 
 /* Goals List with White Circles */
@@ -242,7 +333,11 @@ nav a.active {
   display: flex;
   align-items: flex-start;
   gap: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
+  /* Tektur for better readability */
+  font-family: 'Tektur', sans-serif;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .goals-list li span {
@@ -257,9 +352,11 @@ nav a.active {
   font-weight: 700;
   flex-shrink: 0;
   font-size: 1.1rem;
+  /* Subtle shadow for depth */
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
 }
 
-/* --- NEW: Events Section Styling --- */
+/* --- Events Section Styling --- */
 
 .events-section {
   width: 100%;
@@ -275,34 +372,87 @@ nav a.active {
   margin-top: 40px;
 }
 
+/* Premium event card glass */
 .event-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  /* Apple-style layered glass */
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.65) 0%,
+    rgba(15, 23, 42, 0.55) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 35px;
   border-radius: 24px;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  transition: 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Refined shadow layers */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  min-height: 280px;
 }
 
 .event-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Colored Accents */
+/* Event card h3 - Orbitron styling with balanced glow */
+.event-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.35),
+    0 0 30px rgba(139, 92, 246, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
+
+.event-card > p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.event-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+/* Colored Accents - enhanced with glow */
 .border-blue {
   border-top: 5px solid #3b82f6;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 -2px 8px rgba(59, 130, 246, 0.15);
 }
 
 .border-cyan {
   border-top: 5px solid #06b6d4;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 -2px 8px rgba(6, 182, 212, 0.15);
 }
 
 .border-red {
-  border-top: 5px solid #ef4444;
+  border-top: 5px solid #3b82f6;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 -2px 8px rgba(239, 68, 68, 0.15);
 }
 
 .event-date {
@@ -312,13 +462,50 @@ nav a.active {
 }
 
 .event-details {
-  color: var(--text-dim);
+  font-family: 'Tektur', sans-serif;
+  font-weight: 400;
+  color: rgba(148, 163, 184, 0.95);
   font-size: 0.85rem;
   line-height: 1.8;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
+/* Premium overlay glass */
+.events-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  /* Enhanced overlay glass */
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 15, 0.7) 0%,
+    rgba(5, 5, 10, 0.65) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  transform: translateY(100%);
+  /* Subtle shadow at top */
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.events-inner {
+  width: 100%;
+  max-width: 1400px;
+  padding: 80px 40px;
+  overflow-y: auto;
+}
+
+/* Enhanced button styles */
 .btn-event-blue {
-  background: #2563eb;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   border: none;
   padding: 12px;
@@ -326,10 +513,17 @@ nav a.active {
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-event-blue:hover {
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
 }
 
 .btn-event-cyan {
-  background: #0891b2;
+  background: linear-gradient(135deg, #0891b2, #0e7490);
   color: white;
   border: none;
   padding: 12px;
@@ -337,10 +531,17 @@ nav a.active {
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-event-cyan:hover {
+  box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+  transform: translateY(-2px);
 }
 
 .btn-event-red {
-  background: #dc2626;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   border: none;
   padding: 12px;
@@ -348,18 +549,43 @@ nav a.active {
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  transition: all 0.3s ease;
 }
 
+.btn-event-red:hover {
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Premium glass button */
 .btn-view-all {
   margin-top: 50px;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
   color: white;
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 15px 40px;
   border-radius: 14px;
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   font-weight: bold;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-view-all:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Stats Row */
@@ -368,9 +594,10 @@ nav a.active {
   grid-template-columns: 1fr 1fr;
   gap: 25px;
 }
+
 /* Styling for the Our Goals icon */
 .small-icon {
-  font-size: 1.8rem; /* Increase this number to make it even bigger */
+  font-size: 1.8rem;
   flex-shrink: 0;
 }
 
@@ -379,32 +606,121 @@ nav a.active {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 25px; /* Adds space between header and the list below */
+  margin-bottom: 25px;
 }
 
 .card-header h3 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
+  /* Orbitron enhancements with balanced glow */
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.35),
+    0 0 30px rgba(139, 92, 246, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Premium stat boxes with enhanced glass */
 .stat-box {
-  padding: 30px;
-  border-radius: 20px;
-  color: white;
-  text-align: center;
+  padding: 1px 1px;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 135px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding-left: 30px;
+  /* Enhanced shadows for depth */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Subtle glass overlay on stat boxes */
+.stat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+.stat-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.stat-box h2 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stat-box p {
+  margin: 8px 0 0 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+  font-family: 'Tektur', sans-serif;
+  line-height: 1.6;
+}
+
+/* Common base for the boxes */
+.card-base {
+  background: #0f172a; /* Very dark slate/black */
+  position: relative;
+  z-index: 1;
+  /* This creates the gradient border effect */
+  border: 1px solid transparent; 
+  background-clip: padding-box; 
+  border-radius: 12px;
+}
+
+/* The Purple/Pink accent */
 .blue-bg {
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: 
+    linear-gradient(#0f172a, #0f172a) padding-box, /* Inner fill */
+    linear-gradient(135deg, #8B5CF6, #c026d3) border-box; /* Border gradient */
+  
+  /* Slight colored glow underneath */
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.1); 
 }
 
+/* The Cyan/Green accent */
 .orange-bg {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: 
+    linear-gradient(#0f172a, #0f172a) padding-box,
+    linear-gradient(135deg, #06B6D4, #34D399) border-box;
+    
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.1);
 }
+
 
 @media (max-width: 900px) {
-
   .about-container {
     width: 100%;
   }
@@ -423,33 +739,3 @@ nav a.active {
     margin-left: 0;
   }
 }
-
-/* --- Optimized Dimensions for Stats & Cards --- */
-
-.stat-box { 
-  /* Reduced vertical padding for smaller height */
-  padding: 1px 1px; 
-  border-radius: 28px; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start; /* Changed from center to left align */
-  min-height: 135px; /* Further reduced height */
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding-left: 30px; /* Add left padding for better spacing */
-}
-
-.stat-box h2 { 
-  margin: 0; 
-  font-size: 2.5rem;   /* Large impactful numbers */
-  font-weight: 900; 
-  line-height: 1;
-}
-
-.stat-box p { 
-  margin: 8px 0 0 0; 
-  font-size: 0.9rem; /* Smaller text */
-  font-weight: 400; /* Normal weight instead of 500 */
-  opacity: 0.9;
-}
-
